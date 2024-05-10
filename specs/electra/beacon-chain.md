@@ -1301,7 +1301,7 @@ def process_consolidation(state: BeaconState, signed_consolidation: SignedConsol
     # If the pending consolidations queue is full, no consolidations are allowed in the block
     assert len(state.pending_consolidations) < PENDING_CONSOLIDATIONS_LIMIT
     # If there is too little available consolidation churn limit, no consolidations are allowed in the block
-    assert get_consolidation_churn_limit(state) > MIN_ACTIVATION_BALANCE
+    assert get_consolidation_churn_limit(state) >= MIN_ACTIVATION_BALANCE
     consolidation = signed_consolidation.message
     # Verify that source != target, so a consolidation cannot be used as an exit.
     assert consolidation.source_index != consolidation.target_index
